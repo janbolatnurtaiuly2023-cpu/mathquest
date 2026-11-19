@@ -4,11 +4,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { questions } from '../data/questions';
 
 export default function Question() {
-  const { levelId } = useParams();
+  // worldId-ді де аламыз
+  const { worldId, levelId } = useParams();
   const navigate = useNavigate();
   
-  // Деңгейге сәйкес сұрақты табу
-  const questionData = questions.find(q => q.level === parseInt(levelId)) || questions[0];
+  // Әлемге және деңгейге сәйкес сұрақты табу
+  const questionData = questions.find(
+    q => q.world === parseInt(worldId) && q.level === parseInt(levelId)
+  ) || questions[0];
 
   const [answer, setAnswer] = useState('');
   const [status, setStatus] = useState('idle'); // 'idle', 'correct', 'wrong'
@@ -35,12 +38,12 @@ export default function Question() {
       localStorage.setItem('playerCoins', parseInt(localStorage.getItem('playerCoins') || '0') + 15);
       localStorage.setItem('correctAnswers', parseInt(localStorage.getItem('correctAnswers') || '0') + 1);
       
-      // Келесі деңгейді ашу (1-деңгейді бітірсе, 2-нің құлпы ашылады)
+      // Келесі деңгейді ашу (әлем нөмірін де ескереміз)
       const currentLevel = parseInt(levelId);
-      localStorage.setItem(`level_unlocked_${currentLevel + 1}`, 'true');
+      localStorage.setItem(`level_unlocked_${worldId}_${currentLevel + 1}`, 'true');
       
       // Бұл деңгейдің аяқталғанын сақтау
-      localStorage.setItem(`level_completed_${currentLevel}`, 'true');
+      localStorage.setItem(`level_completed_${worldId}_${currentLevel}`, 'true');
 
     } else {
       setStatus('wrong');
@@ -57,7 +60,12 @@ export default function Question() {
       <div className="flex-1 p-8 bg-slate-900 min-h-screen relative flex flex-col">
         {/* Жоғарғы панель */}
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-xl font-bold text-white">1. Теңдеулер орманы &gt; Деңгей {levelId}</h1>
+          <h1 className="text-xl font-bold text-white">
+            {worldId === '1' ? '1. Теңдеулер орманы' : 
+             worldId === '2' ? '2. Геометрия гибадаттанасы' : 
+             worldId === '3' ? '3. Функциялар обсерваториясы' : 
+             '4. Финалдық сынақ'} &gt; Деңгей {levelId}
+          </h1>
           <div className="flex gap-4 text-sm">
             <span className="text-yellow-400">🪙 {localStorage.getItem('playerCoins') || '250'}</span>
             <span className="text-blue-400">💎 12</span>
@@ -96,7 +104,7 @@ export default function Question() {
             <button
               onClick={() => {
                 playSound('click');
-                navigate('/levels/1'); // Өткізіп жіберсе, 1-әлемге қайтады
+                navigate(`/levels/${worldId}`); // Өткізіп жіберсе, сол әлемге қайтады
               }}
               className="bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 px-8 rounded-lg transition"
             >
@@ -126,7 +134,7 @@ export default function Question() {
                     onClick={() => {
                       setStatus('idle');
                       setAnswer('');
-                      navigate('/levels/1'); // Деңгейлер бетіне қайту
+                      navigate(`/levels/${worldId}`); // Деңгейлер бетіне қайту
                     }}
                     className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg transition"
                   >
