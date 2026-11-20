@@ -117,10 +117,7 @@ export default function Map() {
           ))}
         </div>
 
-        {/* Төменгі жазу */}
-        <p className="absolute bottom-4 left-1/2 -translate-x-1/2 text-gray-300 text-sm z-10">
-          Кеңес: деңгейлерді аяқтап, тәжірибе жина!
-        </p>
+      
       </div>
     </div>
   );
