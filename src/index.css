@@ -1,4 +1,7 @@
+/* 1. Google Fonts импорты ең алдында тұруы керек */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/* 2. Содан кейін ғана Tailwind CSS импорты келеді */
 @import "tailwindcss";
 
 body {
