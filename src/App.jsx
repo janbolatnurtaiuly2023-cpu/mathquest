@@ -14,7 +14,8 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/map" element={<Map />} />
         <Route path="/levels/:worldId" element={<Levels />} />
-        <Route path="/question/:levelId" element={<Question />} />
+        {/* Міне, осы жерде :worldId/:levelId болуы керек! */}
+        <Route path="/question/:worldId/:levelId" element={<Question />} /> 
         <Route path="/profile" element={<Profile />} />
         <Route path="/knowledge" element={<KnowledgeMap />} />
         <Route path="/leaderboard" element={<Leaderboard />} />

@@ -5,7 +5,7 @@ export default function Levels() {
   const navigate = useNavigate();
   const { worldId } = useParams();
 
-  // Деңгейлердің ашылу логикасын localStorage-тен алу
+  // Деңгейлердің ашылу логикасын localStorage-тен алу (Әлемге байланысты)
   const getLevels = () => {
     const baseLevels = [
       { id: 1, status: 'unlocked', stars: 0 }, // 1-деңгей әрқашан ашық
@@ -16,16 +16,17 @@ export default function Levels() {
     ];
 
     return baseLevels.map((level) => {
-      // Егер бұл деңгейдің ашылғаны сақталған болса
-      if (localStorage.getItem(`level_unlocked_${level.id}`) === 'true') {
-        const isCompleted = localStorage.getItem(`level_completed_${level.id}`) === 'true';
-        return { 
-          ...level, 
-          status: isCompleted ? 'completed' : 'unlocked', 
-          stars: isCompleted ? 3 : 0 
-        };
+      // Тексеру кезінде әлем нөмірін де қосамыз!
+      const isCompleted = localStorage.getItem(`level_completed_${worldId}_${level.id}`) === 'true';
+      const isUnlocked = localStorage.getItem(`level_unlocked_${worldId}_${level.id}`) === 'true';
+
+      if (isCompleted) {
+        return { ...level, status: 'completed', stars: 3 }; // Аяқталған, 3 жұлдыз
       }
-      return level;
+      if (isUnlocked || level.id === 1) {
+        return { ...level, status: 'unlocked', stars: 0 }; // Ашық
+      }
+      return level; // Құлыпталған
     });
   };
 
@@ -82,7 +83,7 @@ export default function Levels() {
               <div 
                 key={level.id} 
                 className="flex flex-col items-center cursor-pointer group"
-                onClick={() => level.status !== 'locked' && navigate(`/question/${level.id}`)}
+                onClick={() => level.status !== 'locked' && navigate(`/question/${worldId}/${level.id}`)}
               >
                 <div className={`w-20 h-20 rounded-full flex items-center justify-center text-3xl font-bold border-4 transition-transform duration-300 group-hover:scale-110 ${
                   level.status === 'completed' 
