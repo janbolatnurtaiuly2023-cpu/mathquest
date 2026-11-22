@@ -49,8 +49,8 @@ export default function Levels() {
         <div className="absolute inset-0 bg-black/40"></div>
 
         {/* Жоғарғы панель */}
-        <div className="relative z-10 flex justify-between items-center p-6 bg-slate-900/60 backdrop-blur-sm border-b border-white/10">
-          <h1 className="text-xl font-bold text-white">
+        <div className="relative z-10 flex flex-col md:flex-row justify-between items-center p-4 md:p-6 bg-slate-900/60 backdrop-blur-sm border-b border-white/10 gap-2 md:gap-0">
+          <h1 className="text-lg md:text-xl font-bold text-white text-center md:text-left mt-10 md:mt-0">
             {worldId === '1' ? '1. Теңдеулер орманы' : 
              worldId === '2' ? '2. Геометрия гибадаттанасы' : 
              worldId === '3' ? '3. Функциялар обсерваториясы' : 
@@ -63,13 +63,13 @@ export default function Levels() {
         </div>
 
         {/* Орталық бөлік: Деңгейлер */}
-        <div className="relative z-10 flex-1 flex justify-center items-center">
-          <div className="flex justify-center items-center gap-6 relative w-full max-w-5xl px-10 mt-10">
+        <div className="relative z-10 flex-1 flex justify-center items-center py-10">
+          <div className="flex justify-center items-center gap-2 md:gap-6 relative w-full max-w-5xl px-2 md:px-10">
             
             {/* 2. ҚИСЫҚ СЫЗЫҚ (SVG) - Деңгейлерді қосады */}
             <svg className="absolute top-0 left-0 w-full h-full pointer-events-none -z-10">
               <path
-                d="M 120 200 Q 280 120 440 200 T 760 200 T 1000 200"
+                d="M 50 200 Q 250 120 450 200 T 850 200"
                 stroke="#fbbf24"
                 strokeWidth="3"
                 strokeDasharray="8 8"
@@ -85,7 +85,8 @@ export default function Levels() {
                 className="flex flex-col items-center cursor-pointer group"
                 onClick={() => level.status !== 'locked' && navigate(`/question/${worldId}/${level.id}`)}
               >
-                <div className={`w-20 h-20 rounded-full flex items-center justify-center text-3xl font-bold border-4 transition-transform duration-300 group-hover:scale-110 ${
+                {/* Телефонда кішірек (w-14 h-14), компьютерде үлкенірек (md:w-20 md:h-20) */}
+                <div className={`w-14 h-14 md:w-20 md:h-20 rounded-full flex items-center justify-center text-xl md:text-3xl font-bold border-4 transition-transform duration-300 group-hover:scale-110 ${
                   level.status === 'completed' 
                     ? 'bg-green-800/80 border-yellow-400 text-yellow-400' 
                     : level.status === 'locked'
@@ -96,9 +97,9 @@ export default function Levels() {
                 </div>
                 
                 {/* Жұлдыздар */}
-                <div className="mt-3 text-yellow-400 text-xl tracking-widest drop-shadow-md">
+                <div className="mt-2 md:mt-3 text-yellow-400 text-sm md:text-xl tracking-widest drop-shadow-md">
                   {level.stars > 0 ? '⭐'.repeat(level.stars) : (
-                    <span className="text-gray-500 text-lg">☆☆☆</span>
+                    <span className="text-gray-500 text-xs md:text-lg">☆☆☆</span>
                   )}
                 </div>
               </div>
@@ -107,19 +108,19 @@ export default function Levels() {
         </div>
 
         {/* Төменгі прогресс панелі */}
-        <div className="relative z-10 p-6 mt-auto">
-          <div className="max-w-4xl mx-auto bg-slate-900/80 backdrop-blur-md p-6 rounded-2xl border border-white/10 flex justify-between items-center shadow-2xl">
-            <div className="w-1/3 border-r border-white/10">
-              <p className="text-gray-400 text-sm mb-1">Жиналған жұлдыздар:</p>
-              <p className="text-yellow-400 font-bold text-2xl flex items-center gap-2">⭐ 15/30</p>
+        <div className="relative z-10 p-4 md:p-6 mt-auto">
+          <div className="max-w-4xl mx-auto bg-slate-900/80 backdrop-blur-md p-4 md:p-6 rounded-2xl border border-white/10 flex flex-col md:flex-row justify-between items-center shadow-2xl gap-4 md:gap-0">
+            <div className="w-full md:w-1/3 md:border-r border-white/10 text-center md:text-left">
+              <p className="text-gray-400 text-xs md:text-sm mb-1">Жиналған жұлдыздар:</p>
+              <p className="text-yellow-400 font-bold text-lg md:text-2xl flex items-center justify-center md:justify-start gap-2">⭐ 15/30</p>
             </div>
-            <div className="w-2/3 pl-8">
-              <div className="flex justify-between text-sm mb-2">
+            <div className="w-full md:w-2/3 md:pl-8">
+              <div className="flex justify-between text-xs md:text-sm mb-2">
                 <span className="text-gray-400">Даралық прогресс:</span>
                 <span className="text-white font-bold">50%</span>
               </div>
-              <div className="w-full bg-slate-700 rounded-full h-3 overflow-hidden">
-                <div className="bg-blue-500 h-3 rounded-full shadow-[0_0_10px_rgba(59,130,246,0.8)]" style={{ width: '50%' }}></div>
+              <div className="w-full bg-slate-700 rounded-full h-2 md:h-3 overflow-hidden">
+                <div className="bg-blue-500 h-2 md:h-3 rounded-full shadow-[0_0_10px_rgba(59,130,246,0.8)]" style={{ width: '50%' }}></div>
               </div>
             </div>
           </div>

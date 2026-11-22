@@ -1,7 +1,7 @@
-import { useState } from 'react'; // useState қосылды
+import { useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import { useNavigate } from 'react-router-dom';
-import { getDailyQuests } from '../data/quests'; // Тапсырмаларды импорттау
+import { getDailyQuests } from '../data/quests';
 
 const worlds = [
   {
@@ -27,7 +27,7 @@ const worlds = [
   {
     id: 3,
     name: '3. Функциялар обсерваториясы',
-    unlocked: false,
+    unlocked: true, // Осыны true еттік
     progress: '0/30',
     stars: 0,
     image: '/images/world3.jfif',
@@ -37,7 +37,7 @@ const worlds = [
   {
     id: 4,
     name: '4. Финалдық сынақ',
-    unlocked: false,
+    unlocked: true, // Осыны true еттік
     progress: '0/30',
     stars: 0,
     image: '/images/world4.jfif',
@@ -48,13 +48,14 @@ const worlds = [
 
 export default function Map() {
   const navigate = useNavigate();
-  const [showQuests, setShowQuests] = useState(false); // Модальді терезе күйі
-  const quests = getDailyQuests(); // Тапсырмаларды алу
+  const [showQuests, setShowQuests] = useState(false);
+  const quests = getDailyQuests();
 
   return (
     <div className="flex">
       <Sidebar />
       <div className="flex-1 relative min-h-screen overflow-hidden">
+        
         {/* Фон суреті */}
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -62,8 +63,8 @@ export default function Map() {
         ></div>
         <div className="absolute inset-0 bg-black/40"></div>
 
-        {/* Қисық сызықтар (SVG) */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none">
+        {/* Қисық сызықтар (тек компьютерде көрінеді) */}
+        <svg className="absolute inset-0 w-full h-full pointer-events-none hidden md:block">
           <path
             d="M 250 500 Q 400 400 550 300 T 800 250"
             stroke="white"
@@ -74,19 +75,21 @@ export default function Map() {
           />
         </svg>
 
-        {/* Әлемдер және батырмалар */}
-        <div className="relative z-10 w-full h-screen flex flex-col items-center justify-center">
+        {/* Негізгі контент */}
+        <div className="relative z-10 w-full min-h-screen flex flex-col pt-20 pb-16 md:pt-0 md:justify-center">
           
-          {/* Күнделікті тапсырмалар батырмасы */}
-          <button 
-            onClick={() => setShowQuests(true)}
-            className="absolute top-8 right-8 bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg flex items-center gap-2 transition z-50"
-          >
-            📅 Күнделікті тапсырмалар
-          </button>
+          {/* Күнделікті тапсырмалар батырмасы (телефонда ортаға, компьютерде оң жаққа) */}
+          <div className="absolute top-4 right-4 md:top-8 md:right-8 z-50">
+            <button 
+              onClick={() => setShowQuests(true)}
+              className="bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-4 md:py-3 md:px-6 text-sm md:text-base rounded-xl shadow-lg flex items-center gap-2 transition"
+            >
+              📅 Күнделікті тапсырмалар
+            </button>
+          </div>
 
-          {/* Әлемдер картасы */}
-          <div className="relative w-full max-w-5xl h-[600px]">
+          {/* ================= КОМПЬЮТЕРГЕ АРНАЛҒАН КАРТА (md:block) ================= */}
+          <div className="hidden md:block relative w-full max-w-5xl h-[600px] mx-auto">
             {worlds.map((world) => (
               <div
                 key={world.id}
@@ -125,18 +128,53 @@ export default function Map() {
               </div>
             ))}
           </div>
+
+          {/* ================= ТЕЛЕФОНҒА АРНАЛҒАН КАРТА (md:hidden) ================= */}
+          <div className="md:hidden flex flex-col gap-4 w-full px-4 mt-12 pb-24 z-10">
+            {worlds.map((world) => (
+              <div
+                key={world.id}
+                onClick={() => world.unlocked && navigate(`/levels/${world.id}`)}
+                className={`flex items-center gap-4 p-4 rounded-2xl border backdrop-blur-sm transition ${
+                  world.unlocked 
+                    ? 'bg-slate-800/80 border-purple-500/50 cursor-pointer hover:bg-slate-700/80' 
+                    : 'bg-slate-900/80 border-slate-700 opacity-60'
+                }`}
+              >
+                {world.image ? (
+                  <img 
+                    src={world.image} 
+                    alt={world.name} 
+                    className={`w-16 h-16 rounded-full object-cover border-2 ${world.unlocked ? 'border-purple-500' : 'border-gray-600 grayscale'}`} 
+                  />
+                ) : (
+                  <div className="w-16 h-16 rounded-full bg-slate-700 flex items-center justify-center text-3xl">🏝️</div>
+                )}
+                
+                <div className="flex-1">
+                  <h3 className="text-white font-bold text-sm md:text-base leading-tight">{world.name}</h3>
+                  <p className="text-yellow-400 text-xs mt-1">
+                    {'⭐'.repeat(world.stars) || '☆☆☆'} {world.progress}
+                  </p>
+                </div>
+                
+                {!world.unlocked && <span className="text-2xl mr-2">🔒</span>}
+              </div>
+            ))}
+          </div>
+
         </div>
 
         {/* Төменгі жазу */}
-        <p className="absolute bottom-4 left-1/2 -translate-x-1/2 text-gray-300 text-sm z-10">
+        <p className="absolute bottom-4 left-1/2 -translate-x-1/2 text-gray-300 text-xs md:text-sm z-10 text-center w-full">
           Кеңес: деңгейлерді аяқтап, тәжірибе жина!
         </p>
       </div>
 
       {/* Күнделікті тапсырмалар модальді терезесі */}
       {showQuests && (
-        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-slate-800 border-2 border-yellow-500 p-8 rounded-2xl max-w-lg w-full shadow-2xl relative">
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 px-4">
+          <div className="bg-slate-800 border-2 border-yellow-500 p-6 md:p-8 rounded-2xl w-full max-w-lg shadow-2xl relative">
             <button 
               onClick={() => setShowQuests(false)}
               className="absolute top-4 right-4 text-gray-400 hover:text-white"
@@ -144,25 +182,25 @@ export default function Map() {
               ✖
             </button>
             
-            <h2 className="text-2xl font-bold text-yellow-400 mb-6 text-center">📅 Күнделікті тапсырмалар</h2>
+            <h2 className="text-xl md:text-2xl font-bold text-yellow-400 mb-6 text-center">📅 Күнделікті тапсырмалар</h2>
             
             <div className="flex flex-col gap-4">
               {quests.map((quest) => (
                 <div key={quest.id} className="bg-slate-900 p-4 rounded-xl border border-slate-700">
                   <div className="flex justify-between items-center mb-2">
-                    <span className={`font-bold ${quest.isDone ? 'text-green-400' : 'text-white'}`}>
+                    <span className={`font-bold text-sm md:text-base ${quest.isDone ? 'text-green-400' : 'text-white'}`}>
                       {quest.title}
                     </span>
-                    <span className="text-yellow-400 text-sm">{quest.reward}</span>
+                    <span className="text-yellow-400 text-xs md:text-sm">{quest.reward}</span>
                   </div>
                   <div className="flex items-center gap-4">
-                    <div className="flex-1 bg-slate-700 rounded-full h-3">
+                    <div className="flex-1 bg-slate-700 rounded-full h-2 md:h-3">
                       <div 
-                        className={`h-3 rounded-full ${quest.isDone ? 'bg-green-500' : 'bg-blue-500'}`} 
+                        className={`h-2 md:h-3 rounded-full ${quest.isDone ? 'bg-green-500' : 'bg-blue-500'}`} 
                         style={{ width: `${(quest.current / quest.target) * 100}%` }}
                       ></div>
                     </div>
-                    <span className="text-gray-400 text-sm w-12 text-right">
+                    <span className="text-gray-400 text-xs md:text-sm w-10 md:w-12 text-right">
                       {quest.current}/{quest.target}
                     </span>
                   </div>
@@ -170,7 +208,7 @@ export default function Map() {
               ))}
             </div>
 
-            <p className="text-center text-gray-400 text-sm mt-6">
+            <p className="text-center text-gray-400 text-xs md:text-sm mt-6">
               Тапсырмалар күн сайын жаңарып отырады!
             </p>
           </div>
