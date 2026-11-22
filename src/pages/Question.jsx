@@ -37,6 +37,10 @@ export default function Question() {
       localStorage.setItem('playerXp', parseInt(localStorage.getItem('playerXp') || '0') + 20);
       localStorage.setItem('playerCoins', parseInt(localStorage.getItem('playerCoins') || '0') + 15);
       localStorage.setItem('correctAnswers', parseInt(localStorage.getItem('correctAnswers') || '0') + 1);
+            // Күнделікті тапсырмалардың прогресін сақтау
+      localStorage.setItem('quest_correct_answers', parseInt(localStorage.getItem('quest_correct_answers') || '0') + 1);
+      localStorage.setItem('quest_earned_xp', parseInt(localStorage.getItem('quest_earned_xp') || '0') + 20);
+      localStorage.setItem('quest_earned_coins', parseInt(localStorage.getItem('quest_earned_coins') || '0') + 15);
       
       // Келесі деңгейді ашу (әлем нөмірін де ескереміз)
       const currentLevel = parseInt(levelId);
