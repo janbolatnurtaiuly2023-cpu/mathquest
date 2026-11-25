@@ -13,6 +13,7 @@ export default function Levels() {
       { id: 3, status: 'locked', stars: 0 },
       { id: 4, status: 'locked', stars: 0 },
       { id: 5, status: 'locked', stars: 0 },
+      { id: 6, status: 'locked', stars: 0 },
     ];
 
     return baseLevels.map((level) => {

@@ -165,5 +165,139 @@ export const questions = [
     text: "Финалдық сұрақ: 5! (5 факториал) нешеге тең?",
     correctAnswer: "120",
     explanation: "5! = 5 × 4 × 3 × 2 × 1 = 120"
+  },
+    // ================= 5-ӘЛЕМ: Пропорциялар алаңы =================
+  {
+    id: 33,
+    world: 5,
+    level: 1,
+    text: "Пропорцияны шешіңіз: 2/5 = x/10",
+    correctAnswer: "4",
+    explanation: "2 × 10 = 5 × x\n20 = 5x\nx = 4"
+  },
+  {
+    id: 34,
+    world: 5,
+    level: 2,
+    text: "Пропорцияны шешіңіз: 3/4 = 9/x",
+    correctAnswer: "12",
+    explanation: "3 × x = 4 × 9\n3x = 36\nx = 12"
+  },
+  {
+    id: 35,
+    world: 5,
+    level: 3,
+    text: "Пропорцияны шешіңіз: 5/8 = x/24",
+    correctAnswer: "15",
+    explanation: "5 × 24 = 8 × x\n120 = 8x\nx = 15"
+  },
+  {
+    id: 36,
+    world: 5,
+    level: 4,
+    text: "Пропорцияны шешіңіз: 7/10 = 14/x",
+    correctAnswer: "20",
+    explanation: "7 × x = 10 × 14\n7x = 140\nx = 20"
+  },
+  {
+    id: 37,
+    world: 5,
+    level: 5,
+    text: "Пропорцияны шешіңіз: 4/6 = x/15",
+    correctAnswer: "10",
+    explanation: "4 × 15 = 6 × x\n60 = 6x\nx = 10"
+  },
+
+  // ================= 6-ӘЛЕМ: Проценттер мұнарасы =================
+  {
+    id: 38,
+    world: 6,
+    level: 1,
+    text: "200-дің 10%-ы нешеге тең?",
+    correctAnswer: "20",
+    explanation: "200 × 0.10 = 20"
+  },
+  {
+    id: 39,
+    world: 6,
+    level: 2,
+    text: "50-дің 20%-ы нешеге тең?",
+    correctAnswer: "10",
+    explanation: "50 × 0.20 = 10"
+  },
+  {
+    id: 40,
+    world: 6,
+    level: 3,
+    text: "Егер тауар 1000 теңге тұрса және оған 15% жеңілдік жасалса, оның бағасы қанша болады?",
+    correctAnswer: "850",
+    explanation: "Жеңілдік = 1000 × 0.15 = 150\nЖаңа баға = 1000 - 150 = 850"
+  },
+  {
+    id: 41,
+    world: 6,
+    level: 4,
+    text: "120-ның 25%-ы нешеге тең?",
+    correctAnswer: "30",
+    explanation: "120 × 0.25 = 30"
+  },
+  {
+    id: 42,
+    world: 6,
+    level: 5,
+    text: "80-нің 50%-ы нешеге тең?",
+    correctAnswer: "40",
+    explanation: "80 × 0.50 = 40"
+  },
+
+  // ================= 7-ӘЛЕМ: Ұлы финал =================
+  {
+    id: 43,
+    world: 7,
+    level: 1,
+    text: "Теңдеуді шешіңіз: 2x - 5 = x + 3",
+    correctAnswer: "8",
+    explanation: "2x - x = 3 + 5\nx = 8"
+  },
+  {
+    id: 44,
+    world: 7,
+    level: 2,
+    text: "Тікбұрыштың ұзындығы 12, ені 4. Периметрін табыңыз.",
+    correctAnswer: "32",
+    explanation: "Периметр = 2 × (ұзындық + ені)\nP = 2 × (12 + 4) = 2 × 16 = 32"
+  },
+  {
+    id: 45,
+    world: 7,
+    level: 3,
+    text: "y = 3x + 2 функциясында x = 5 болса, y нешеге тең?",
+    correctAnswer: "17",
+    explanation: "y = 3(5) + 2\ny = 15 + 2 = 17"
+  },
+  {
+    id: 46,
+    world: 7,
+    level: 4,
+    text: "Пропорцияны шешіңіз: 5/7 = x/21",
+    correctAnswer: "15",
+    explanation: "5 × 21 = 7 × x\n105 = 7x\nx = 15"
+  },
+  {
+    id: 47,
+    world: 7,
+    level: 5,
+    text: "300-дің 30%-ы нешеге тең?",
+    correctAnswer: "90",
+    explanation: "300 × 0.30 = 90"
+  },
+  {
+    id: 48,
+    world: 7,
+    level: 6,
+    text: "Ұлы финал: 7! (7 факториал) нешеге тең?",
+    correctAnswer: "5040",
+    explanation: "7! = 7 × 6 × 5 × 4 × 3 × 2 × 1 = 5040"
   }
+  
 ];

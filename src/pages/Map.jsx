@@ -11,7 +11,7 @@ const worlds = [
     progress: '15/30',
     stars: 3,
     image: '/images/world1.jfif',
-    x: '25%',
+    x: '15%',
     y: '50%',
   },
   {
@@ -21,28 +21,58 @@ const worlds = [
     progress: '10/30',
     stars: 2,
     image: '/images/world2.jfif',
-    x: '55%',
-    y: '30%',
+    x: '35%',
+    y: '25%',
   },
   {
     id: 3,
     name: '3. Функциялар обсерваториясы',
-    unlocked: true, // Осыны true еттік
+    unlocked: true,
     progress: '0/30',
     stars: 0,
     image: '/images/world3.jfif',
-    x: '80%',
-    y: '25%',
+    x: '55%',
+    y: '50%',
   },
   {
     id: 4,
     name: '4. Финалдық сынақ',
-    unlocked: true, // Осыны true еттік
+    unlocked: true,
     progress: '0/30',
     stars: 0,
     image: '/images/world4.jfif',
-    x: '60%',
-    y: '70%',
+    x: '75%',
+    y: '25%',
+  },
+  {
+    id: 5,
+    name: '5. Пропорциялар алаңы',
+    unlocked: true, // Барлығын ашық қылып қоямыз, кейін өзгертеміз
+    progress: '0/30',
+    stars: 0,
+    image: '/images/world3.jfif', // Әзірге 3-әлемнің суретін қолданамыз
+    x: '20%',
+    y: '80%',
+  },
+  {
+    id: 6,
+    name: '6. Проценттер мұнарасы',
+    unlocked: true,
+    progress: '0/30',
+    stars: 0,
+    image: '/images/world4.jfif', // Әзірге 4-әлемнің суретін қолданамыз
+    x: '50%',
+    y: '80%',
+  },
+  {
+    id: 7,
+    name: '7. Ұлы финал',
+    unlocked: true,
+    progress: '0/30',
+    stars: 0,
+    image: '/images/background.jfif', // Фонды қолданамыз
+    x: '80%',
+    y: '80%',
   },
 ];
 
