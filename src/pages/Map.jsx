@@ -60,8 +60,8 @@ const worlds = [
     unlocked: true,
     progress: '0/30',
     stars: 0,
-    image: '/images/world4.jfif', 
-    x: '20%',
+    image: '/images/world6.jfif', // 6-әлемнің суреті
+    x: '25%', // Сол жаққа жылжыттық
     y: '85%',
   },
   {
@@ -70,9 +70,9 @@ const worlds = [
     unlocked: true,
     progress: '0/30',
     stars: 0,
-    image: '/images/world7.jfif', 
-    x: '50%',
-    y: '90%',
+    image: '/images/world7.jfif', // 7-әлемнің суреті
+    x: '75%', // Оң жаққа жылжыттық
+    y: '85%',
   },
 ];
 
