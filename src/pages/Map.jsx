@@ -70,7 +70,7 @@ const worlds = [
     unlocked: true,
     progress: '0/30',
     stars: 0,
-    image: '/images/background.jfif', 
+    image: '/images/world7.jfif', 
     x: '50%',
     y: '90%',
   },
